@@ -2,12 +2,15 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
-import { HostelsModule } from './hostels/hostels.module';
+import { HotelModule } from './hotel/hotel.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import {ConfigModule} from '../config/config.module';
 import {ConfigService} from '../config/config.service';
-import { ReservationsModule } from './reservations/reservations.module';
 import { ChatSupportModule } from './chat-support/chat-support.module';
+import { ReservationModule } from './reservation/reservation.module';
+import { SupportrequestModule } from './supportrequest/supportrequest.module';
+import { MessageModule } from './message/message.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,7 +19,7 @@ import { ChatSupportModule } from './chat-support/chat-support.module';
       inject:[ConfigService],
       useFactory: async (configService:ConfigService)=>configService.getMongoConfig(),
     }), 
-    UsersModule, HostelsModule, ReservationsModule, ChatSupportModule],
+    UsersModule, HotelModule,  ChatSupportModule, ReservationModule, SupportrequestModule, MessageModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
