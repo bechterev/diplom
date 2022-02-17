@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
-import { SupportRequestService } from './support.request.service';
-import { MessageController } from './message.controller';
-import { SupportRequestClientService } from './supportrequestclient/supportrequestclient.service';
+import { MessageService } from './message/message.service';
+
 
 @Module({
-  controllers: [MessageController],
-  providers: [SupportRequestService, SupportRequestClientService, ]
+  providers: [MessageService],
+  exports: [MessageService],
 })
 export class MessageModule {}

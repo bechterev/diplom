@@ -1,22 +1,24 @@
-
-import {IsArray, IsBoolean, IsDate, IsNotEmpty, IsString} from 'class-validator';
+import {IsArray, IsDate, IsNotEmpty, IsString} from 'class-validator';
 import { Schema as MongooseSchema } from '@nestjs/mongoose';
 export class CreateHotelDto {
-    @IsNotEmpty()
+    id:string;
+
     @IsString()
-    _id:string;
+    @IsNotEmpty()
+    title:string;
 
     @IsNotEmpty()
     @IsString()
     description:string;
+
     @IsArray()
     images:Array<string>
+
     @IsNotEmpty()
     @IsDate()
     createAt:Date;
+
     @IsNotEmpty()
     @IsDate()
     updateAt:Date;
-
-
 }

@@ -1,4 +1,3 @@
-
 import { Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import { Document,  Mongoose,  Types } from 'mongoose';
 import { Hotel } from './hotel.entity';
@@ -6,16 +5,25 @@ import { Hotel } from './hotel.entity';
 export class HotelRoom extends Document{
 @Prop({unique:true, required:true})
 _id:Types.ObjectId;
+
+@Prop({required:true})
+title:string;
+
 @Prop({unique:false, required:true,type:Types.ObjectId,ref:'Hotel'})
-hotel:Hotel;
+hotel:string;
+
 @Prop({required:false, unique:false})
 description:string;
+
 @Prop({required:false, unique:false, default:[]})
-images:Array<string>
+images:Array<string>;
+
 @Prop({required:true, unique:false})
 createAt:Date;
+
 @Prop({required:true, unique:false})
 updateAt:Date;
+
 @Prop({required:true, unique:false, default:true})
 isEnabled:boolean;
 }

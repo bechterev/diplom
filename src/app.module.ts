@@ -11,6 +11,7 @@ import { ReservationModule } from './reservation/reservation.module';
 import { SupportrequestModule } from './supportrequest/supportrequest.module';
 import { MessageModule } from './message/message.module';
 import { AuthModule } from './auth/auth.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -19,7 +20,10 @@ import { AuthModule } from './auth/auth.module';
       inject:[ConfigService],
       useFactory: async (configService:ConfigService)=>configService.getMongoConfig(),
     }), 
-    UsersModule, HotelModule,  ChatSupportModule, ReservationModule, SupportrequestModule, MessageModule, AuthModule],
+    UsersModule, HotelModule,  ChatSupportModule, ReservationModule,
+    SupportrequestModule, MessageModule, AuthModule,
+    MulterModule.register({ dest: './files'})
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

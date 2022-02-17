@@ -26,4 +26,19 @@ export class HotelService implements IHotelService {
   async  search(params: Pick<Hotel,"title">):Promise<Hotel[]>{
     return this.hotelModel.find(params);
   }
+
+  async getListHotels(limit:number, offset: number = 0): Promise<Hotel[]> {
+    try {
+      return await this.hotelModel.find().skip(offset).limit(limit);
+    } catch (e) {
+      return [];
+    }
+  }
+
+  async changeDescription(id: string, title: string, description: string) {
+    try {
+      const result = this.hotelModel.updateOne({id}, {title, description, updateAt: new Date()});
+      return { status: 'success' };
+    } catch (err) { return { status: 'error', message: err.message  }};
+  }
 }

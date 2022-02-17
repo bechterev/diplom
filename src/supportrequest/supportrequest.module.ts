@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
-import { SupportrequestService } from './supportrequest.service';
-import { SupportrequestController } from './supportrequest.controller';
+import { SupportRequestClientService } from './services/supportRequestClientService';
+import { SupportRequestEmployeeService } from './services/supportRequestEmployeeService';
+import { SupportRequestService } from './services/supportRequestService';
+
 
 @Module({
-  controllers: [SupportrequestController],
-  providers: [SupportrequestService]
+  providers: [
+  ],
 })
 export class SupportrequestModule {}

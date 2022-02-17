@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dto/createUser.dto';
 import { UserService } from 'src/users/user/user.service';
 import bcrypt from 'bcrypt';
@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 @Injectable()
 export class AuthenticationService {
     constructor(private readonly userService: UserService){}
-public async regiser(registartionData:CreateUserDto){
+    public async regiser(registartionData:CreateUserDto){
     const hashingPassword = await bcrypt.hash(registartionData.passwordHash, 10);
     try{
         const createUser = await this.userService.create({

@@ -25,11 +25,32 @@ export class HotelRoomService implements IHotelRoomService{
     async create(data: Partial<HotelRoom>): Promise<HotelRoom> {
         return this.hotelRoomModel.create(data);
     }
-    async findById(id: ID, isEnabled?: true): Promise<HotelRoom> {
-        if(isEnabled) return this.hotelRoomModel.findOne({id:id,isEnabled:true})
-        else return this.hotelRoomModel.findById(id);
-        
+    async findById(id: ID, isEnabled?: boolean): Promise<HotelRoom> {
+        return this.hotelRoomModel.findOne({id: id.toString(), isEnabled});
     }
+
+    async findRoom(id: ID, isEnabled?: true, limit?: number, offset: number = 0): Promise<HotelRoom[]> {
+        if(!isEnabled) return [];
+
+        try {
+            if(id) { 
+                const room = await this.hotelRoomModel.findOne({ id:id, isEnabled:true })
+                return [room];
+            };
+
+            if( limit >= 0 ) {
+                const rooms =await this.hotelRoomModel.find({limit, offset});
+                return rooms;
+            }
+
+          }
+          catch(err) { return []; }
+    }
+
+    async findWithId(id: string) {
+        return await this.hotelRoomModel.findOne({id});
+    }
+
     async search(params: SearchRoomsParams): Promise<HotelRoom[]> {
         if(params.isEnabled) return this.hotelRoomModel.find({isEnabled:true,
             [params.limit]:params.limit,

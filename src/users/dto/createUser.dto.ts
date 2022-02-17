@@ -1,10 +1,8 @@
+import { ObjectId } from 'mongoose';
 import {IsNotEmpty, IsString} from 'class-validator';
-import { Schema as MongooseSchema } from '@nestjs/mongoose';
 
 export class CreateUserDto {
-    @IsNotEmpty()
-    @IsString()
-    _id:string
+    id: string;
     @IsNotEmpty()
     @IsString()
     email:string;
@@ -23,5 +21,4 @@ export class CreateUserDto {
     @IsString()
     @IsNotEmpty()
     role:string = 'client';
-
 }
